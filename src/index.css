@@ -3,3 +3,12 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  /* Fallback for browsers that do not support gradients */
+  background-color: #e0e0e0; /* Light gray fallback */
+  
+  /* Radial Gradient definition */
+  background: radial-gradient(circle, #ffffff, #e6e6ff);
+
+}
