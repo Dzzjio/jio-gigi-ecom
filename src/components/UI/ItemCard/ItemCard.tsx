@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { StyledItemCard } from "./styled";
 
 type ItemCardProps = {
@@ -8,8 +9,10 @@ type ItemCardProps = {
 const ItemCard: React.FC<ItemCardProps> = ({ img, price }) => {
     return (
         <StyledItemCard>
+            <button className="add-to-cart">O</button>
             <img src={img} alt="ia" />
             <p>price: <span>{price}$</span></p>
+            <Link to="/"><button>Buy Now</button></Link>
         </StyledItemCard>
     );
 };

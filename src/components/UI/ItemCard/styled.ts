@@ -10,4 +10,12 @@ export const StyledItemCard = styled.div`
         height: auto;
         object-fit: cover;
     }
+
+    & > button.add-to-cart {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 `;
