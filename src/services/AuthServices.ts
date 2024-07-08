@@ -9,7 +9,7 @@ export const authServices = {
     password: string 
     phoneNumber: string
   }) => api.post('auth/register', {params: body}),
-  refteshTokens: (refteshToken: string) => (api.post('auth/update-token', {refteshToken}))
+  refreshTokens: (refteshToken: string) => (api.post('auth/update-token', {refteshToken}))
 }
 
 export default authServices
