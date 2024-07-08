@@ -1,20 +1,15 @@
-import axios from 'axios';
+import api from "../utils/api";
 
-const API_BASE_URL = 'https://api.example.com';
+export const authServices = {
+  login: (email: string, password: string) => (api.post('auth/login', {email, password})),
+  register: ( body: {
+    firstName: string
+    lastName: string  
+    email: string
+    password: string 
+    phoneNumber: string
+  }) => api.post('auth/register', {params: body}),
+  refteshTokens: (refteshToken: string) => (api.post('auth/update-token', {refteshToken}))
+}
 
-// Example authentication service for handling user login
-export const authService = {
-  login: async (username: string, password: string) => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-        username,
-        password,
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Error logging in:', error);
-      throw error;
-    }
-  },
-  // Additional authentication methods such as logout or token refresh can be added here
-};
+export default authServices
