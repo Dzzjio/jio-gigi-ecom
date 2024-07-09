@@ -13,10 +13,6 @@ export const HeaderContent = styled.div`
     align-items: center;
     justify-content: space-between;
     font-family: 'Roboto', sans-serif;
-
-    & > *:not(:first-child) {
-        margin-left: 5%;
-    }
 `;
 
 export const Logo = styled.img`
@@ -27,7 +23,7 @@ export const SearchContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  margin-right: 20px;
+  margin: 0 20px;
 
   position: relative;
 
@@ -47,6 +43,7 @@ export const SearchInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 10px;
+  padding-left: 40px;
 
     &::placeholder {
     color: black;
@@ -87,4 +84,23 @@ export const ButtonContainer = styled.div`
             width: 100px;
         }
     }
+`;
+
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+export const ModalContent = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 `;
