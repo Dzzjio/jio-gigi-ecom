@@ -5,7 +5,7 @@ const Home = () => {
     <section>
       <div></div>
       <div>
-        <img src={tshirt} alt="tshirt" />
+        {/* <img src={tshirt} alt="tshirt" /> */}
       </div>
     </section>
   )
