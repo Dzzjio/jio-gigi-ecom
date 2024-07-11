@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import {Button, Form, Input, PasswordContainer, ToggleIcon} from './styled'
+import authServices from '../../../services/AuthServices';
+// import { useInput } from '../../../hooks/useInput';
 
 const LogInForm = () => {
 
@@ -14,9 +16,19 @@ const LogInForm = () => {
         console.log('Password:', password);
       };
     
-      const togglePasswordVisibility = () => {
-        setIsPasswordVisible(!isPasswordVisible);
-      };
+    const togglePasswordVisibility = () => {
+      setIsPasswordVisible(!isPasswordVisible);
+    };
+
+    // const emailInput = useInput((value) => value.includes('@'))
+    // const passwordInput = useInput((value) => value.length > 6)
+
+    const logIn = () => {
+      authServices.login({email: email, password: password}).then((data) => {
+        console.log(data);
+        
+      })
+    }
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -44,7 +56,7 @@ const LogInForm = () => {
           </svg>
           </ToggleIcon>
         </PasswordContainer>
-        <Button type="submit">შესვლა</Button>
+        <Button onClick={logIn} type="submit">შესვლა</Button>
       </Form>
     )
 }

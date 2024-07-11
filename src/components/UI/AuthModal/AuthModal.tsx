@@ -6,8 +6,6 @@ import RegisterForm from './Register';
 const AuthModal = () => {
   const [isRegistering, setIsRegistering] = useState(true);
 
-
-
   const toggleMode = () => {
     setIsRegistering(!isRegistering);
   };
