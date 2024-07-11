@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import AuthModal from '../components/UI/AuthModal/AuthModal';
 import CartModal from '../components/UI/CartModal';
 import { ButtonContainer, CloseButton, HeaderContainer, HeaderContent, Logo, ModalContent, ModalOverlay, SearchContainer, SearchInput} from './styles/StyledHeader';
@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Logo src="https://i.pinimg.com/originals/20/60/2d/20602d43cc993811e5a6bd1886af4f33.png" alt="logo" />
+        <Link to='/'><Logo src="https://i.pinimg.com/originals/20/60/2d/20602d43cc993811e5a6bd1886af4f33.png" alt="logo" /></Link>
         <SearchContainer 
           style={{ 
             opacity: isSearchOpen ? 1 : 0,

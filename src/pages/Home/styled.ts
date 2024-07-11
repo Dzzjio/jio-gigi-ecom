@@ -8,6 +8,10 @@ export const HeroSection = styled.div`
   text-align: center;
   margin-bottom: 40px;
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
@@ -16,6 +20,7 @@ export const HeroSection = styled.div`
   h2 {
     font-size: 1.5rem;
     margin-bottom: 20px;
+    line-height: 5;
   }
 
   img {
@@ -31,6 +36,11 @@ export const HeroSection = styled.div`
     color: white;
     border: none;
     cursor: pointer;
+
+    & > a {
+      text-decoration: none;
+      color: white;
+    }
 
     &:hover {
       background-color: #0056b3;
@@ -96,7 +106,7 @@ export const Promotions = styled.div`
 export const PromotionBanner = styled.div`
   text-align: center;
   padding: 20px;
-  background-color: #ffdd57;
+  background-color: #6cb2eb;
   color: #333;
   font-size: 1.5rem;
 `;

@@ -6,7 +6,7 @@ const Root = () => {
   return (
     <div>
       <Header />
-      <div style={{maxWidth: '80vw', margin: '0 auto'}}>
+      <div style={{maxWidth: '70vw', margin: '0 auto'}}>
         <Outlet />
       </div>
       <Footer />

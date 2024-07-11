@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import tshirt from '../../assets/Images/61j6-CNsRpL._AC_SL1500_.jpg';
+import Button from '../../components/UI/Button';
 import { Categories, CategoryItem, CategoryList, FeaturedProducts, HeroSection, HomeContainer, Newsletter, ProductCard, ProductGrid, PromotionBanner, Promotions, ReviewItem, ReviewList, Testimonials } from './styled';
 
 const Home = () => {
@@ -6,69 +8,71 @@ const Home = () => {
     <HomeContainer>
       {/* Hero Section */}
       <HeroSection>
-        <h1>Welcome to Our Store!</h1>
-        <h2>Check out our latest collections</h2>
+        <div>
+          <h1>მოგესალმებით ჩვენს მაღაზიაში!</h1>
+          <h2>იხილეთ ჩვენი ახალი კოლექციები</h2>
+          <Button><Link to='/shop'>დაიწყე შოპინგი</Link></Button>
+        </div>
         <img src={tshirt} alt="tshirt" />
-        <button>Shop Now</button>
       </HeroSection>
 
       {/* Featured Products */}
       <FeaturedProducts>
-        <h2>Featured Products</h2>
+        <h2>რჩეული პროდუქტები</h2>
         <ProductGrid>
           <ProductCard>
-            <img src={tshirt} alt="Product 1" />
-            <p>Product 1</p>
+            <img src={tshirt} alt="პროდუქტი 1" />
+            <p>პროდუქტი 1</p>
           </ProductCard>
           <ProductCard>
-            <img src={tshirt} alt="Product 2" />
-            <p>Product 2</p>
+            <img src={tshirt} alt="პროდუქტი 2" />
+            <p>პროდუქტი 2</p>
           </ProductCard>
           <ProductCard>
-            <img src={tshirt} alt="Product 3" />
-            <p>Product 3</p>
+            <img src={tshirt} alt="პროდუქტი 3" />
+            <p>პროდუქტი 3</p>
           </ProductCard>
         </ProductGrid>
       </FeaturedProducts>
 
       {/* Categories */}
       <Categories>
-        <h2>Shop by Category</h2>
+        <h2>კატეგორიების მიხედვით შოპინგი</h2>
         <CategoryList>
-          <CategoryItem>Electronics</CategoryItem>
-          <CategoryItem>Clothing</CategoryItem>
-          <CategoryItem>Accessories</CategoryItem>
+          <CategoryItem>ელექტრონიკა</CategoryItem>
+          <CategoryItem>ტანსაცმელი</CategoryItem>
+          <CategoryItem>აქსესუარები</CategoryItem>
         </CategoryList>
       </Categories>
 
       {/* Promotions/Banners */}
       <Promotions>
-        <h2>Special Deals</h2>
+        <h2>სპეციალური შეთავაზებები</h2>
         <PromotionBanner>
-          <p>50% off on selected items!</p>
+          <p>50% ფასდაკლება არჩეულ პროდუქტებზე!</p>
         </PromotionBanner>
       </Promotions>
 
       {/* Testimonials */}
       <Testimonials>
-        <h2>Customer Reviews</h2>
+        <h2>კლიენტების მიმოხილვები</h2>
         <ReviewList>
           <ReviewItem>
-            <p>"Great quality and fast shipping!"</p>
-            <p>- John Doe</p>
+            <p>"მაღალი ხარისხი და სწრაფი მიტანა!"</p>
+            <p>- ჯონ დო</p>
           </ReviewItem>
           <ReviewItem>
-            <p>"Excellent customer service."</p>
-            <p>- Jane Smith</p>
+            <p>"შესანიშნავი მომხმარებელთა მომსახურება."</p>
+            <p>- ჯეინ სმიტი</p>
           </ReviewItem>
         </ReviewList>
       </Testimonials>
 
       {/* Newsletter Signup */}
       <Newsletter>
-        <h2>Subscribe to our Newsletter</h2>
-        <input type="email" placeholder="Enter your email" />
-        <button>Subscribe</button>
+        <h2>გამოიწერეთ ჩვენი ახალი ამბები</h2>
+        <input type="email" placeholder="შეიყვანეთ თქვენი ელ. ფოსტა" />
+        <Button>გამოწერა</Button>
       </Newsletter>
     </HomeContainer>
   );
