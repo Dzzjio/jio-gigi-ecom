@@ -34,14 +34,7 @@ const Header = () => {
     <HeaderContainer>
       <HeaderContent>
         <Link to='/'><Logo src="https://i.pinimg.com/originals/20/60/2d/20602d43cc993811e5a6bd1886af4f33.png" alt="logo" /></Link>
-        <SearchContainer 
-          style={{ 
-            opacity: isSearchOpen ? 1 : 0,
-            pointerEvents: isSearchOpen ? 'auto' : 'none',
-            transform: `translateX(${isSearchOpen ? '0%' : '50%'})`,  // Slide from left to center
-            transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',  // Smooth transition for opacity and transform
-          }}
-        >
+        <SearchContainer >
           <SearchInput
             type="text"
             placeholder="ძიება..."
@@ -54,9 +47,6 @@ const Header = () => {
         </SearchContainer>
         <ButtonContainer>
         <span onClick={() => openSearchField()}>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
         </span>
           <span onClick={() => handleOpenModal('Cart')}>
             <p>კალათა</p>

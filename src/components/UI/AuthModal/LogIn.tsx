@@ -1,49 +1,66 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import {Button, Form, Input, PasswordContainer, ToggleIcon} from './styled'
 import authServices from '../../../services/AuthServices';
-// import { useInput } from '../../../hooks/useInput';
+import { useInput } from '../../../hooks/useInput';
+import authStore from '../../../stores/Auth.store';
+import { emailValidator, isValid } from '../../../utils/validation';
+import { toast } from 'react-toastify';
 
 const LogInForm = () => {
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        // Handle form submission logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
-      };
     
     const togglePasswordVisibility = () => {
       setIsPasswordVisible(!isPasswordVisible);
     };
 
-    // const emailInput = useInput((value) => value.includes('@'))
-    // const passwordInput = useInput((value) => value.length > 6)
-
-    const logIn = () => {
-      authServices.login({email: email, password: password}).then((data) => {
-        console.log(data);
-        
-      })
-    }
+    const emailInput = useInput(
+      (value) =>
+        (typeof value === "string" && emailValidator(value)) ||
+        value === import.meta.env.VITE_ADMIN_EMAIL
+    );
+    const passwordInput = useInput((value) => isValid(value));
+  
+    const { setTokens } = authStore();
+  
+    const errors = [
+      emailInput.hasError,
+      passwordInput.hasError,
+      !emailInput.value,
+      !passwordInput.value,
+    ];
+  
+    const login = (e: FormEvent) => {
+      e.preventDefault();
+      
+      if (errors.some((error) => error)) {
+        toast.error("Please fill all fields correctly");
+        return;
+      }
+  
+      authServices
+        .login({ email: emailInput.value as string, password: passwordInput.value as string })
+        .then(({ data }) => {
+          setTokens(data);
+          toast.success("Login successful");
+        })
+        .catch(() => {
+          toast.error("Invalid credentials");
+        });
+    };
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={(e) => login(e)}>
         <Input
           type="text"
           placeholder="მეილი"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          {...emailInput}
         />
         <PasswordContainer>
           <Input
             type={isPasswordVisible ? 'text' : 'password'}
             placeholder="პაროლი"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            {...passwordInput}
           />
           <ToggleIcon visible={!isPasswordVisible} onClick={togglePasswordVisibility}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -56,7 +73,7 @@ const LogInForm = () => {
           </svg>
           </ToggleIcon>
         </PasswordContainer>
-        <Button onClick={logIn} type="submit">შესვლა</Button>
+        <Button type="submit">შესვლა</Button>
       </Form>
     )
 }

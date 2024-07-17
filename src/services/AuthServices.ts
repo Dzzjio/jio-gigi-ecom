@@ -1,15 +1,15 @@
 import api from "../utils/api";
 
-export const authServices = {
-  login: (email: string, password: string) => (api.post('auth/login', {email, password})),
-  register: ( body: {
-    firstName: string
-    lastName: string  
-    email: string
-    password: string 
-    phoneNumber: string
-  }) => api.post('auth/register', {params: body}),
-  refreshTokens: (refteshToken: string) => (api.post('auth/update-token', {refteshToken}))
-}
+const authServices = {
+  login: (body: { email: string; password: string }) => api.post("auth/login", body),
+  register: (body: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+    phone_number: string;
+  }) => api.post("auth/register", body),
+  refreshTokens: (refresh_token: string) => api.post("auth/update-tokens", { refresh_token }),
+};
 
-export default authServices
+export default authServices;

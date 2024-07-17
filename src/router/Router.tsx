@@ -8,6 +8,10 @@ import Profile from '../pages/Profile/Profile';
 import About from '../pages/About/About';
 import ProductDetail from '../pages/ProductPage/ProductPage';
 import CheckoutPage from '../pages/Checkout/Checkout';
+import AdminRoute from './AdminRoute';
+import AdminPage from '../pages/Admin/admin';
+import PrivacyPolicy from '../pages/PrivacyAndPolicy/PrivacyAndPolicy';
+import HelpCenter from '../pages/HelpCenter/HelpCenter';
 
 const Router = createBrowserRouter([
   {
@@ -22,6 +26,14 @@ const Router = createBrowserRouter([
       {
         path: '/shop',
         element: <Shop />,
+      },
+      {
+        path: '/privacy-and-policy',
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: '/help-center',
+        element: <HelpCenter />,
       },
       {
         path: '/product/:productId',
@@ -42,6 +54,15 @@ const Router = createBrowserRouter([
             path: '/profile',
             element: <Profile />,
           },
+          {
+            element: <AdminRoute />,
+            children: [
+              {
+                path: '/admin',
+                element: <AdminPage />,
+              }
+            ]
+          }
         ],
       },
     ],
