@@ -9,19 +9,19 @@ const Footer: React.FC = () => {
         <LinkGroup>
           <LinkTitle>Company</LinkTitle>
           <LinkItem href="/">About Us</LinkItem>
-          <LinkItem href="/">Contact</LinkItem>
+          <LinkItem href="/contact">Contact</LinkItem>
           <LinkItem href="/privacy-and-policy">Privacy Policy</LinkItem>
         </LinkGroup>
         <LinkGroup>
           <LinkTitle>Resources</LinkTitle>
           <LinkItem href="/">Blog</LinkItem>
           <LinkItem href="/help-center">Help Center</LinkItem>
-          <LinkItem href="/">Careers</LinkItem>
+          <LinkItem href="/faq">FAQ</LinkItem>
         </LinkGroup>
       </LinksContainer>
       <SocialMediaContainer>
-        <SocialMediaLink href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          twit
+        <SocialMediaLink href="https://x.com" target="_blank" rel="noopener noreferrer">
+          X
         </SocialMediaLink>
         <SocialMediaLink href="https://facebook.com" target="_blank" rel="noopener noreferrer">
           fb

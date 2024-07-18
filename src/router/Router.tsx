@@ -12,6 +12,8 @@ import AdminRoute from './AdminRoute';
 import AdminPage from '../pages/Admin/admin';
 import PrivacyPolicy from '../pages/PrivacyAndPolicy/PrivacyAndPolicy';
 import HelpCenter from '../pages/HelpCenter/HelpCenter';
+import FAQ from '../pages/faq/faq';
+import Contact from '../pages/Contact/contact';
 
 const Router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const Router = createBrowserRouter([
       {
         path: '/help-center',
         element: <HelpCenter />,
+      },
+      {
+        path: '/faq',
+        element: <FAQ />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
       },
       {
         path: '/product/:productId',
