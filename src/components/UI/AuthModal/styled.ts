@@ -65,7 +65,7 @@ export const Button = styled.button`
   }
 `;
 
-export const ToggleIcon = styled.div<{ visible: boolean }>`
+export const ToggleIcon = styled.div<{ $visible: boolean }>`
   cursor: pointer;
   position: absolute;
   right: 10px;
@@ -73,7 +73,7 @@ export const ToggleIcon = styled.div<{ visible: boolean }>`
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  display: ${(props) => (props.visible ? 'block' : 'none')};
+  display: ${(props) => (props.$visible ? 'block' : 'none')};
 
   svg {
     width: 100%;

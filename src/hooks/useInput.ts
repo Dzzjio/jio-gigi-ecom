@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 /**
  * Represents the shape of the state object returned by the useInput hook.
@@ -7,13 +7,13 @@ export type InputState = {
   /** The current value of the input field. */
   value: string | number;
   /** Indicates whether the input field is currently focused. */
-  focus: boolean;
+  // focus: boolean;
   /** Event handler for input changes. */
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** Event handler for input blur. */
-  onBlur: () => void;
+  // onBlur: () => void;
   /** Event handler for input focus. */
-  onFocus: () => void;
+  // onFocus: () => void;
   /** Indicates whether there is an error in the input value. */
   hasError: boolean;
   /** Function to clear the input value. */
@@ -32,7 +32,7 @@ export const useInput = (
   const [value, setValue] = useState(initialValue);
 
   const [touched, setTouched] = useState<boolean>(!!initialValue);
-  const [focus, setFocus] = useState<boolean>(false);
+  // const [focus, setFocus] = useState<boolean>(false);
 
   const isValid: boolean = validate(value);
   const hasError: boolean = !isValid && touched;
@@ -41,31 +41,31 @@ export const useInput = (
     setValue(e.target.value);
   };
 
-  const onBlur = (): void => {
-    setTouched(true);
-    !value && setFocus(false);
-  };
+  // const onBlur = (): void => {
+  //   setTouched(true);
+  //   !value && setFocus(false);
+  // };
 
-  const onFocus = (): void => {
-    setFocus(true);
-  };
+  // const onFocus = (): void => {
+  //   setFocus(true);
+  // };
 
   const clear = (): void => {
     setValue(initialValue);
     setTouched(false);
-    setFocus(false);
+    // setFocus(false);
   };
 
-  useEffect(() => {
-    value && initialValue && onFocus();
-  }, [value, initialValue]);
+  // useEffect(() => {
+  //   value && initialValue && onFocus();
+  // }, [value, initialValue]);
 
   return {
     value,
-    focus,
+    // focus,
     onChange,
-    onBlur,
-    onFocus,
+    // onBlur,
+    // onFocus,
     hasError,
     clear,
   };
