@@ -1,5 +1,44 @@
+import { useEffect } from "react";
+import userServices from "../../services/UserServices";
+import authStore from "../../stores/Auth.store";
+import { ProfileContainer, Heading, InfoItem } from './styled';
+import { Button } from "../../components/UI/AuthModal/styled";
+
 const Profile = () => {
-  return <div>Profile</div>
+  const { fullUser, setFullUser, clearTokens } = authStore();
+
+  useEffect(() => {
+    userServices.getCurrent().then(({ data }) => {
+      setFullUser(data);
+    });
+  }, []);
+
+  const handleLogout = () => {
+    clearTokens();
+    alert("User logged out and refresh token deleted.");
+  };
+
+  return (
+    <ProfileContainer>
+      <Heading>პარამეტრები</Heading>
+      <InfoItem>
+        <span>მეილი</span>
+        <span>{fullUser?.email}</span>
+      </InfoItem>
+      <InfoItem>
+        <span>სახელი, გვარი</span>
+        <span>{fullUser?.first_name}, {fullUser?.last_name}</span>
+      </InfoItem>
+      <InfoItem>
+        <span>მობილურის ნომერი</span>
+        <span>{fullUser?.phone_number}</span>
+      </InfoItem>
+      <Button onClick={handleLogout} className="log-out-btn">
+        <span className="log-out-icon"><svg xmlns="http://www.w3.org/2000/svg" width='20px' height='20px' viewBox="0 0 512 512"><path d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg></span>
+        <span>გამოსვლა</span>
+      </Button>
+    </ProfileContainer>
+  );
 }
 
-export default Profile
+export default Profile;

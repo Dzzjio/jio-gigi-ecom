@@ -34,7 +34,6 @@ const RegisterForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('done');
     
     
     if (errors.some((error) => error)) {
@@ -51,7 +50,9 @@ const RegisterForm = () => {
       })
       .then(({ data }) => {
         setTokens(data);
-        alert("User created successfully");
+        alert(`User created successfully ${emailInput.value}`);
+        console.log(emailInput);
+        
         toast.success("Registration successful");
       })
       .catch(() => {
@@ -72,6 +73,7 @@ const RegisterForm = () => {
 
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
+      {/* <h1>{}</h1> */}
       <Input
         type="text"
         placeholder="სახელი"
