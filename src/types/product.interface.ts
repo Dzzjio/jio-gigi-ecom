@@ -9,7 +9,9 @@ export interface addProductDto {
   price: number;
 }
 
-export interface ProductI extends addProductDto, Item {}
+export interface ProductI extends addProductDto, Item {
+  categoryId: string;
+}
 
 export interface ProductFilterI {
   categoryName?: string;
