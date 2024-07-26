@@ -43,10 +43,14 @@ const LogInForm = () => {
         .then(({ data }) => {
           setTokens(data);
           toast.success("Login successful");
+
+          
         })
         .catch(() => {
           toast.error("Invalid credentials");
         });
+
+
     };
 
     return (
