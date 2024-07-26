@@ -3,6 +3,7 @@ import productStore from "../../stores/Product.store";
 import productServices from "../../services/ProductServices";
 import ItemCard from "../../components/UI/ItemCard/ItemCard";
 import ShoppingFilters from "../../components/UI/ShopFilters/shopFilters";
+import { ShopContainer } from "./styled";
 
 const Shop: React.FC = () => {
   const { setProducts, setLoadingProducts, products } = productStore(state => ({
@@ -12,6 +13,7 @@ const Shop: React.FC = () => {
   }));
 
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 1000 });
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,20 +38,25 @@ const Shop: React.FC = () => {
     setSelectedCategory(categoryName);
   };
 
-  const filteredProducts = selectedCategory
-    ? products.filter(product => {
-        console.log('Product category_name:', product.category_name); // Log product category name
-        console.log('Selected category name:', selectedCategory); // Log selected category name
-        return product.category_name === selectedCategory;
-      })
-    : products;
+  const handlePriceChange = (minPrice: number, maxPrice: number) => {
+    setPriceRange({ min: minPrice, max: maxPrice });
+  };
+
+  const filteredProducts = products.filter(product => {
+    const withinPriceRange = product.price >= priceRange.min && product.price <= priceRange.max;
+    const matchesCategory = selectedCategory ? product.category_name === selectedCategory : true;
+    return withinPriceRange && matchesCategory;
+  });
 
   return (
-    <div>
-      <h1>Shop</h1>
-      <ShoppingFilters onCategoryChange={handleCategoryChange} />
+    <ShopContainer>
+      <ShoppingFilters
+        onCategoryChange={handleCategoryChange}
+        onPriceChange={handlePriceChange}
+        selectedCategory={selectedCategory}
+      />
       <ItemCard products={filteredProducts} />
-    </div>
+    </ShopContainer>
   );
 };
 
