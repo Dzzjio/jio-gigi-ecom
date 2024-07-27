@@ -39,16 +39,16 @@ const ShoppingFilters: React.FC<ShoppingFiltersProps> = ({ onCategoryChange, onP
     fetchCategories();
   }, [setCategories, setLoadingCategories]);
 
-  useEffect(() => {
-    // Load saved filters from local storage
-    const savedCategory = localStorage.getItem('selectedCategory') || "";
-    const savedMinPrice = Number(localStorage.getItem('minPrice')) || 0;
-    const savedMaxPrice = Number(localStorage.getItem('maxPrice')) || 5000;
+  // useEffect(() => {
+  //   // Load saved filters from local storage
+  //   const savedCategory = localStorage.getItem('selectedCategory') || "";
+  //   const savedMinPrice = Number(localStorage.getItem('minPrice')) || 0;
+  //   const savedMaxPrice = Number(localStorage.getItem('maxPrice')) || 5000;
 
-    setPriceRange([savedMinPrice, savedMaxPrice]);
-    onCategoryChange(savedCategory);
-    onPriceChange(savedMinPrice, savedMaxPrice);
-  }, [onCategoryChange, onPriceChange]);
+  //   setPriceRange([savedMinPrice, savedMaxPrice]);
+  //   onCategoryChange(savedCategory);
+  //   onPriceChange(savedMinPrice, savedMaxPrice);
+  // }, [onCategoryChange, onPriceChange]);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const categoryName = event.target.value;

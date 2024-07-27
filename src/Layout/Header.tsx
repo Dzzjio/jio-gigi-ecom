@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import AuthModal from '../components/UI/AuthModal/AuthModal';
-import CartModal from '../components/UI/CartModal';
+import CartModal from '../components/UI/cartModal/CartModal';
 import ProfileModal from '../components/UI/ProfileModal';
 import { ButtonContainer, CloseButton, HeaderContainer, HeaderContent, Logo, ModalContent, ModalOverlay, SearchContainer, SearchInput } from './styles/StyledHeader';
 import { useEffect, useState } from 'react';

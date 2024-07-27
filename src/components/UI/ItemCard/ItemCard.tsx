@@ -1,12 +1,32 @@
-import { StyledItemCard } from "./styled";
-import { ProductI } from "../../../types/product.interface";
+import React from "react";
 import { Link } from "react-router-dom";
+import { ProductI } from "../../../types/product.interface";
+import cartProductStore from "../../../stores/Cart.store";
+import { StyledItemCard } from "./styled";
+import { CartProductI } from "../../../types/cart.interface";
 
 interface ItemCardProps {
   products: ProductI[];
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({ products }) => {
+  const addCartProduct = cartProductStore(state => state.addCartProduct);
+
+  const handleAddToCart = (product: ProductI) => {
+    const cartProduct: CartProductI = {
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      user_id: "", // Replace with actual user ID if necessary
+      id: product.id,
+      product_id: product.id,
+      cartProduct: product,
+      count: 1
+    };
+
+    console.log('Adding to cart:', cartProduct);
+    addCartProduct(cartProduct);
+  };
+
   return (
     <StyledItemCard>
       <div className="products">
@@ -19,7 +39,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ products }) => {
               <p className="price">Price: ${product.price}</p>
               {product.salePrice && <p className="sale-price">Sale Price: ${product.salePrice}</p>}
               <div className="buttons">
-                <button className="add-to-cart">
+                <button className="add-to-cart" onClick={() => handleAddToCart(product)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512">
                     <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
                     <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>

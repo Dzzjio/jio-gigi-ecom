@@ -21,7 +21,6 @@ const Shop: React.FC = () => {
       try {
         const response = await productServices.allProducts();
         const productsData = response.data.products; // Extract the products array
-        console.log('Fetched products:', productsData); // Log the extracted products array
         setProducts(productsData); // Update the store with the array of products
       } catch (error) {
         console.error("Failed to fetch products", error);
@@ -34,7 +33,6 @@ const Shop: React.FC = () => {
   }, [setProducts, setLoadingProducts]);
 
   const handleCategoryChange = (categoryName: string) => {
-    console.log('Category changed to:', categoryName); // Log the category name when changed
     setSelectedCategory(categoryName);
   };
 

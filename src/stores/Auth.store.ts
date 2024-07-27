@@ -35,6 +35,7 @@ const authStore = create<authStoreI>()((set) => ({
     localStorage.removeItem("refreshToken");
     set({ user: null, accessToken: "", refreshToken: "" });
   },
+  isLoggedIn: () => {}
 }));
 
 const accessToken = localStorage.getItem("accessToken");
