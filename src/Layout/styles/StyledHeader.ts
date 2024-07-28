@@ -1,64 +1,84 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-    width: 100%;
-    border-bottom: 1px solid #9ca3af;
-    background-color: #6cb2eb;
+  width: 100%;
+  border-bottom: 1px solid #9ca3af;
+  background-color: #6cb2eb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 `;
 
 export const HeaderContent = styled.div`
-    width: 70%;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: 'Roboto', sans-serif;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-family: 'Roboto', sans-serif;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 export const Logo = styled.img`
   width: 150px;
+
+  @media (max-width: 768px) {
+    width: 100px;
+  }
 `;
 
 export const SearchContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  margin: 0 20px;
-
+  margin: 10px 20px;
   position: relative;
-  
 
   & > svg {
     width: 24px;
     height: 24px;
     margin-left: 10px;
-
     position: absolute;
+    right: 10px;
+    cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+    margin: 10px 0;
   }
 `;
 
 export const SearchInput = styled.input`
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 10px;
   padding-left: 40px;
+  font-size: 16px;
 
-    &::placeholder {
+  &::placeholder {
     color: black;
     font-size: 15px;
-    padding-left: 30px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 20px;
+  align-items: center;
 
-  * > p {
+  p {
+    margin: 0;
     font-size: 14px;
   }
 
@@ -67,29 +87,20 @@ export const ButtonContainer = styled.div`
     align-items: center;
     gap: 5px;
     cursor: pointer;
-
     position: relative;
   }
 
-    svg {
+  svg {
     width: 20px;
     height: 20px;
   }
 
-    div.sircle {
-        position: absolute;
-        right: -10px;
-        border-radius: 50px;
-        padding: 20px;
-        z-index: -1;
-        width: 24px;
-        height: 24px;
-        background-color: gray;
-
-        &:hover {
-            width: 100px;
-        }
+  @media (max-width: 768px) {
+    gap: 10px;
+    p {
+      display: none;
     }
+  }
 `;
 
 export const ModalOverlay = styled.div`
@@ -109,19 +120,20 @@ export const ModalContent = styled.div`
   background: white;
   padding: 20px;
   border-radius: 10px;
-
   position: relative;
+  width: 90%;
+  max-width: 500px;
 `;
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: -35px;
-  right: 0px;
+  top: -10px;
+  right: -10px;
   background-color: white;
   border: none;
   height: 25px;
   width: 25px;
-  border-radius: 200px;
+  border-radius: 50%;
   cursor: pointer;
   color: black;
   transform: rotate(45deg);
