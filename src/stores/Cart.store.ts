@@ -19,8 +19,11 @@ const cartProductStore = create<CartProductStoreI>()((set, get) => ({
   setCartProducts: (products) => set({ CartProducts: products }),
 
   addCartProduct: (product) => {
-    const userId = authStore.getState().user?.id || "";
-    if (!userId) return;
+    const userId = authStore.getState().user?.id;
+    if (!userId) {
+      alert("You must log in first to add items to your cart.");
+      return;
+    }
 
     set((state) => {
       const existingProductIndex = state.CartProducts.findIndex(
