@@ -1,8 +1,7 @@
 import React from "react";
 import cartProductStore from "../../../stores/Cart.store";
 import { CartProductI } from "../../../types/cart.interface";
-import { Heading, ProductItem, Text } from "./styled";
-import Button from "../Button";
+import { Button, Heading, ProductItem, } from "./styled";
 
 const CartModal: React.FC = () => {
   const { CartProducts, removeSingleCartProduct, removeAllCartProduct, clearCart } = cartProductStore(state => ({
@@ -26,16 +25,16 @@ const CartModal: React.FC = () => {
 
   return (
     <div>
-      <Heading>Cart</Heading>
+      <Heading>შენი კალათა</Heading>
       {CartProducts.length === 0 ? (
-        <Text>Your cart is empty.</Text>
+        <h1>შენი კალათა ცარიელია</h1>
       ) : (
         <div>
           {CartProducts.map((product: CartProductI) => (
             <ProductItem key={product.id}>
               <h3>{product.cartProduct.title}</h3>
-              <Text>Price: ${product.cartProduct.price}</Text>
-              <Text>Quantity: {product.count}</Text>
+              <h1>Price: ${product.cartProduct.price}</h1>
+              <h1>Quantity: {product.count}</h1>
               <Button onClick={() => handleRemoveSingle(product.id)}>Remove 1</Button>
               <Button onClick={() => handleRemoveAll(product.id)}>Remove All</Button>
             </ProductItem>

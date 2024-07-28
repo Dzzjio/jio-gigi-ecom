@@ -1,5 +1,4 @@
 import { create } from "zustand";
-
 import { CartProductI } from "../types/cart.interface";
 
 interface CartProductStoreI {
@@ -13,19 +12,30 @@ interface CartProductStoreI {
   clearCart: () => void;
 }
 
+const LOCAL_STORAGE_KEY = "cartProducts";
+
 const cartProductStore = create<CartProductStoreI>()((set) => ({
-  CartProducts: [],
-  setCartProducts: (products) => set({ CartProducts: products }),
+  CartProducts: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"),
+  setCartProducts: (products) => {
+    set({ CartProducts: products });
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products));
+  },
   loadingCartProducts: false,
   setLoadingCartProducts: (loading) => set({ loadingCartProducts: loading }),
   addCartProduct: (product) =>
     set((state) => {
       const productIndex = state.CartProducts.findIndex((p) => p.id === product.id);
+      let newCartProducts;
       if (productIndex === -1) {
-        return { CartProducts: [...state.CartProducts, product] };
+        newCartProducts = [...state.CartProducts, product];
+      } else {
+        newCartProducts = [...state.CartProducts];
+        newCartProducts[productIndex] = {
+          ...newCartProducts[productIndex],
+          count: newCartProducts[productIndex].count + 1
+        };
       }
-      const newCartProducts = [...state.CartProducts];
-      newCartProducts[productIndex] = product;
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newCartProducts));
       return { CartProducts: newCartProducts };
     }),
   removeSingleCartProduct: (productId) => {
@@ -35,16 +45,22 @@ const cartProductStore = create<CartProductStoreI>()((set) => ({
           return { ...p, count: p.count - 1 };
         }
         return p;
-      });
-
-      return { CartProducts: newCartProducts.filter((p) => p.count > 0) };
+      }).filter((p) => p.count > 0);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newCartProducts));
+      return { CartProducts: newCartProducts };
     });
   },
   removeAllCartProduct: (productId) => {
-    set((state) => ({
-      CartProducts: state.CartProducts.filter((product) => product.id !== productId),
-    }));
+    set((state) => {
+      const newCartProducts = state.CartProducts.filter((product) => product.id !== productId);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newCartProducts));
+      return { CartProducts: newCartProducts };
+    });
   },
-  clearCart: () => set({ CartProducts: [] }),
+  clearCart: () => {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    set({ CartProducts: [] });
+  },
 }));
+
 export default cartProductStore;
