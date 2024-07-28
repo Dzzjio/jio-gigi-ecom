@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { ProductI } from "../../../types/product.interface";
 import cartProductStore from "../../../stores/Cart.store";

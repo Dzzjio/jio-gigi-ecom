@@ -1,49 +1,89 @@
-import { Link, useParams } from 'react-router-dom';
-import Button from '../../components/UI/Button';
-import { BuySection, ProductDetailContainer, ProductImage, ProductInfo } from './styled';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { ProductI } from '../../types/product.interface';
+import productServices from '../../services/ProductServices';
+import cartProductStore from '../../stores/Cart.store';
+import { Container, Description, Image, Price, SalePrice, Title, ButtonContainer, AddToCartButton } from './styled';
 
-interface ProductI {
-    id: number;
-    name: string;
-    category: string;
-    description: string;
-    image: string;
-  }
-  
-  const products: ProductI[] = [
-    { id: 1, name: 'Laptop', category: 'Electronics', description: 'A high-performance laptop', image: '/path/to/laptop.jpg' },
-    { id: 2, name: 'T-Shirt', category: 'Clothing', description: 'A stylish t-shirt', image: '/path/to/tshirt.jpg' },
-    { id: 3, name: 'Watch', category: 'Accessories', description: 'A trendy watch', image: '/path/to/watch.jpg' },
-    // Add more products here
-  ];
-  
-  const ProductDetail: React.FC = () => {
-    const { productId } = useParams<{ productId?: string }>();
-  
-    //FIXME
-    // Ensure productId is defined and convert to number
-    const product = productId ? products.find(p => p.id === parseInt(productId)) : undefined;
-  
-    if (!product) {
-      return <p>Product not found</p>;
+const ProductDetail: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<ProductI | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const addCartProduct = cartProductStore((state) => state.addCartProduct);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!id) {
+        setError('No product ID provided');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await productServices.getProduct(id);
+        setProduct(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to fetch product details');
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  const handleAddToCart = () => {
+    if (product) {
+      const cartProduct = {
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        user_id: "",
+        id: product.id,
+        product_id: product.id,
+        cartProduct: product,
+        count: 1,
+      };
+
+      addCartProduct(cartProduct);
     }
-  
-    return (
-      <ProductDetailContainer>
-        <ProductImage>
-          <img src={product.image} alt={product.name} />
-        </ProductImage>
-        <ProductInfo>
-          <h1>{product.name}</h1>
-          <p>Category: {product.category}</p>
-          <p>{product.description}</p>
-          <BuySection>
-            <Button>Add to Cart</Button>
-            <Button><Link to='/checkout'>Buy Now</Link></Button>
-          </BuySection>
-        </ProductInfo>
-      </ProductDetailContainer>
-    );
   };
-  
-  export default ProductDetail;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  return (
+    <Container>
+      {product ? (
+        <div>
+          <Title>{product.title}</Title>
+          <Image src={product.image} alt={product.title} />
+          <Description>{product.description}</Description>
+          <Price>Price: ${product.price}</Price>
+          {product.salePrice && <SalePrice>Sale Price: ${product.salePrice}</SalePrice>}
+          <ButtonContainer>
+            <AddToCartButton onClick={handleAddToCart}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512">
+                <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
+                <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
+                <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M48 80h64l48 272h256" />
+                <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
+              </svg>
+              Add to Cart
+            </AddToCartButton>
+            <button>Go to Chekout</button>
+          </ButtonContainer>
+        </div>
+      ) : (
+        <Container>Product not found</Container>
+      )}
+    </Container>
+  );
+};
+
+export default ProductDetail;
