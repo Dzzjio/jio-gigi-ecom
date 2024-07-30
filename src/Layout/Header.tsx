@@ -6,7 +6,6 @@ import { ButtonContainer, CloseButton, HeaderContainer, HeaderContent, Logo, Mod
 import { useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 import authStore from '../stores/Auth.store';
-import logo from '../assets/Images/logofinal.webp'
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -29,10 +28,10 @@ const Header = () => {
 
   const openSearchField = () => {
     setIsSearchOpen(!isSearchOpen);
-  }
+  };
 
-  const { accessToken, refreshToken, fullUser } = useStore(authStore);
-  const isAuthenticated = accessToken && refreshToken;
+  const { user } = useStore(authStore);
+  const isAuthenticated = !!user;  // Simplified authentication check
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -43,7 +42,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Link to='/'><Logo className='main-logo' src={logo} alt="logo" /></Link>
+        <Link to='/'><Logo src="https://i.pinimg.com/originals/20/60/2d/20602d43cc993811e5a6bd1886af4f33.png" alt="logo" /></Link>
         <SearchContainer >
           <SearchInput
             type="text"
@@ -65,7 +64,7 @@ const Header = () => {
             </svg>
           </span>
           <span onClick={() => handleOpenModal(isAuthenticated ? 'Profile' : 'Login')}>
-            <p>{isAuthenticated ? fullUser?.first_name : 'შესვლა'}</p>
+            <p>{isAuthenticated ? user.first_name : 'შესვლა'}</p>
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -81,9 +80,9 @@ const Header = () => {
                 </svg>
               </CloseButton>
               <div>
-                {modalContent === 'Cart' && <CartModal/> }
-                {modalContent === 'Login' && <AuthModal/> }
-                {modalContent === 'Profile' && <ProfileModal/> }
+                {modalContent === 'Cart' && <CartModal />}
+                {modalContent === 'Login' && <AuthModal />}
+                {modalContent === 'Profile' && <ProfileModal />}
               </div>
             </ModalContent>
           </ModalOverlay>
