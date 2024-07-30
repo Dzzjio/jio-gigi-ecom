@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px;
-  width: 30vw;
+  // width: 30vw;
   height: auto;
   position: relative;
 
@@ -24,19 +24,16 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
-  @media(max-width: 750px) {
-  width:100vw;
-  height: 100vh;
-  }
+
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-contenet: space-betwen;
+  justify-content: space-between;
   gap: 10px;
   width: 100%;
-  heigt: 100%
+  height: 100%;
 
   position: relative;
   bottom: 0;

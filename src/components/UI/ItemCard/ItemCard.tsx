@@ -22,7 +22,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ products }) => {
       count: 1
     };
 
-    console.log('Adding to cart:', cartProduct);
+    alert( cartProduct.cartProduct.title + ' დაემატა კალათაში');
     addCartProduct(cartProduct);
   };
 
