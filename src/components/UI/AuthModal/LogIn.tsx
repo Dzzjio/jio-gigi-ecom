@@ -4,6 +4,7 @@ import authServices from '../../../services/AuthServices';
 import { useInput } from '../../../hooks/useInput';
 import authStore from '../../../stores/Auth.store';
 import cartProductStore from '../../../stores/Cart.store'; // Import cart store
+import useModalStore from '../../../stores/Modal.store'; // Import the modal store
 import { emailValidator, isValid } from '../../../utils/validation';
 import { toast } from 'react-toastify';
 
@@ -22,6 +23,9 @@ const LogInForm = () => {
   const passwordInput = useInput((value) => isValid(value));
 
   const { setTokens } = authStore();
+  const { closeModal } = useModalStore(state => ({
+    closeModal: state.closeModal
+  }));
 
   const errors = [
     emailInput.hasError,
@@ -46,6 +50,9 @@ const LogInForm = () => {
 
         // Load the user's cart after successful login
         cartProductStore.getState().loadUserCart();
+
+        // Close the modal after successful login
+        closeModal();
       })
       .catch(() => {
         toast.error("Invalid credentials");
@@ -56,13 +63,13 @@ const LogInForm = () => {
     <Form onSubmit={(e) => login(e)}>
       <Input
         type="text"
-        placeholder="Email"
+        placeholder="მეილი"
         {...emailInput}
       />
       <PasswordContainer>
         <Input
           type={isPasswordVisible ? 'text' : 'password'}
-          placeholder="Password"
+          placeholder="პაროლი"
           {...passwordInput}
         />
         <ToggleIcon $visible={!isPasswordVisible} onClick={togglePasswordVisibility}>

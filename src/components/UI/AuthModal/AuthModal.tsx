@@ -4,7 +4,7 @@ import LogInForm from './LogIn';
 import RegisterForm from './Register';
 
 const AuthModal = () => {
-  const [isRegistering, setIsRegistering] = useState(true);
+  const [isRegistering, setIsRegistering] = useState(false);
 
   const toggleMode = () => {
     setIsRegistering(!isRegistering);

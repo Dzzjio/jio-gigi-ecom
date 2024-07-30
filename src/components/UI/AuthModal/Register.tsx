@@ -4,6 +4,7 @@ import { Button, Form, Input, PasswordContainer, ToggleIcon } from './styled';
 import authServices from '../../../services/AuthServices';
 import { useInput } from '../../../hooks/useInput';
 import authStore from '../../../stores/Auth.store';
+import useModalStore from '../../../stores/Modal.store'; // Import the modal store
 import { emailValidator, isValid, phoneNumberValidator } from '../../../utils/validation';
 
 const RegisterForm = () => {
@@ -13,9 +14,11 @@ const RegisterForm = () => {
   const firstNameInput = useInput((value) => isValid(value));
   const lastNameInput = useInput((value) => isValid(value));
   const phoneNumberInput = useInput((value) => typeof value === "string" && phoneNumberValidator(value));
-  // const [isRegistered, useIsRegistered] = useState(false)
 
   const { setTokens } = authStore();
+  const { closeModal } = useModalStore(state => ({
+    closeModal: state.closeModal
+  }));
 
   const errors = [
     emailInput.hasError,
@@ -34,12 +37,12 @@ const RegisterForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    
+
     if (errors.some((error) => error)) {
       toast.error("Please fill all fields correctly");
       return;
     }
+
     authServices
       .register({
         email: emailInput.value as string,
@@ -50,10 +53,8 @@ const RegisterForm = () => {
       })
       .then(({ data }) => {
         setTokens(data);
-        alert(`User created successfully ${emailInput.value}`);
-        console.log(emailInput);
-        
-        toast.success("Registration successful");
+        toast.success(`User created successfully ${emailInput.value}`);
+        closeModal(); // Close the modal after successful registration
       })
       .catch(() => {
         toast.error("Registration failed");
@@ -72,8 +73,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <Form onSubmit={(e) => handleSubmit(e)}>
-      {/* <h1>{}</h1> */}
+    <Form onSubmit={handleSubmit}>
       <Input
         type="text"
         placeholder="სახელი"

@@ -32,7 +32,7 @@ export const HeaderContent = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 80px;
+  width: 70px;
 
   @media (max-width: 768px) {
     width: 60px;
