@@ -23,6 +23,14 @@ export const HeroText = styled.h1`
   font-size: 4rem;
   margin-bottom: 20px;
   color: #fff;
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+  }
 `;
 
 export const BackgroundImage = styled.img`
@@ -53,7 +61,7 @@ export const LandingButton = styled.button`
     align-items: center;
     color: inherit;
     text-decoration: none;
-    gap: 10px; /* Adjusts space between text and icon */
+    gap: 10px;
   }
 
   &:hover {
@@ -69,4 +77,25 @@ export const LandingButton = styled.button`
       width: 100%;
       height: 100%;
     }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    padding: 15px 30px;
+
+    .arrow-land-svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    padding: 10px 20px;
+
+    .arrow-land-svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
