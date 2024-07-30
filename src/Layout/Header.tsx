@@ -6,6 +6,7 @@ import { ButtonContainer, CloseButton, HeaderContainer, HeaderContent, Logo, Mod
 import { useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 import authStore from '../stores/Auth.store';
+import logo from '../assets/Images/logofinal.webp'
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -42,7 +43,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Link to='/'><Logo src="https://i.pinimg.com/originals/20/60/2d/20602d43cc993811e5a6bd1886af4f33.png" alt="logo" /></Link>
+        <Link to='/'><Logo src={logo} alt="logo" /></Link>
         <SearchContainer >
           <SearchInput
             type="text"
