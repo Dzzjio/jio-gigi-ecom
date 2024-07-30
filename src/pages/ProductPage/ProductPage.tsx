@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ProductI } from '../../types/product.interface';
 import productServices from '../../services/ProductServices';
 import cartProductStore from '../../stores/Cart.store';
@@ -11,6 +11,7 @@ const ProductDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const addCartProduct = cartProductStore((state) => state.addCartProduct);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -49,6 +50,13 @@ const ProductDetail: React.FC = () => {
     }
   };
 
+  const handleGoToCheckout = () => {
+    if (product) {
+      handleAddToCart(); // Ensure the product is added to the cart
+      navigate('/checkout');
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -76,7 +84,7 @@ const ProductDetail: React.FC = () => {
               </svg>
               Add to Cart
             </AddToCartButton>
-            <button>Go to Chekout</button>
+            <button onClick={handleGoToCheckout}>Go to Checkout</button>
           </ButtonContainer>
         </div>
       ) : (
