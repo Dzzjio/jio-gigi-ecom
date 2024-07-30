@@ -1,10 +1,11 @@
 import { FooterContainer, LinkGroup, LinkItem, LinkTitle, LinksContainer, SocialMediaContainer, SocialMediaLink } from "./styles/StyledFooter";
 import { Logo } from "./styles/StyledHeader";
+import logo from '../assets/Images/logofinal.webp'
 
 const Footer: React.FC = () => {
   return (
     <FooterContainer>
-      <Logo src="https://i.pinimg.com/originals/20/60/2d/20602d43cc993811e5a6bd1886af4f33.png" alt="logo" />
+      <Logo src={logo} alt="logo" />
       <LinksContainer>
         <LinkGroup>
           <LinkTitle>Company</LinkTitle>

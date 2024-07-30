@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const FilterContainer = styled.div`
-  margin: 20px;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin: 0 auto;
+  width: 100%;
 `;
 
 export const StyledSelect = styled.select`

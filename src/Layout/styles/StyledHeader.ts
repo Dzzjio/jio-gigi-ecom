@@ -7,6 +7,12 @@ export const HeaderContainer = styled.header`
   position: sticky;
   top: 0;
   z-index: 100;
+
+  .main-logo {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -26,10 +32,10 @@ export const HeaderContent = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 150px;
+  width: 80px;
 
   @media (max-width: 768px) {
-    width: 100px;
+    width: 60px;
   }
 `;
 
