@@ -7,6 +7,16 @@ export const HomeContainer = styled.div`
   justify-content: center;
   min-height: 90vh;
   text-align: center;
+
+  & > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(108, 178, 235, 0.3);
+      z-index: -1;
+    }
 `;
 
 export const HeroText = styled.h1`
@@ -16,23 +26,47 @@ export const HeroText = styled.h1`
 `;
 
 export const BackgroundImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1; /* This ensures the image is behind other elements */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
 `;
 
 export const LandingButton = styled.button`
   padding: 20px 40px;
-  background: rgba(0,0,0,.4);
+  background: transparent;
   font-size: 1.5rem;
   border-radius: 5px;
+  border: 2px solid #6cb2eb;
+  color: #6cb2eb;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
   & > * {
-    color: white;
+    display: flex;
+    align-items: center;
+    color: inherit;
     text-decoration: none;
+    gap: 10px; /* Adjusts space between text and icon */
   }
-`
+
+  &:hover {
+    background-color: #6cb2eb;
+    color: white;
+  }
+
+  .arrow-land-svg {
+    width: 30px;
+    height: 30px;
+
+    & > svg > * {
+      width: 100%;
+      height: 100%;
+    }
+`;
