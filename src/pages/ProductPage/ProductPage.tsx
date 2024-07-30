@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ProductI } from '../../types/product.interface';
 import productServices from '../../services/ProductServices';
 import cartProductStore from '../../stores/Cart.store';
-import { Container, Description, Image, Price, SalePrice, Title, ButtonContainer, AddToCartButton } from './styled';
+import { Container, Wrapper, Image, Details, Title, Description, Price, SalePrice, ButtonContainer, AddToCartButton } from './styled';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -58,7 +58,7 @@ const ProductDetail: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>იტვირთება...</div>;
   }
 
   if (error) {
@@ -68,27 +68,35 @@ const ProductDetail: React.FC = () => {
   return (
     <Container>
       {product ? (
-        <div>
-          <Title>{product.title}</Title>
-          <Image src={product.image} alt={product.title} />
-          <Description>{product.description}</Description>
-          <Price>Price: ${product.price}</Price>
-          {product.salePrice && <SalePrice>Sale Price: ${product.salePrice}</SalePrice>}
+        <Wrapper>
+          <div>
+            <Image src={product.image} alt={product.title} />
+            <p>ID: {product.id}</p>
+          </div>
+          <Details>
+            <Title>{product.title}</Title>
+            <Description>{product.description}</Description>
+            {product.salePrice && <SalePrice>Sale Price: ${product.salePrice}</SalePrice>}
+            
+          </Details>
           <ButtonContainer>
-            <AddToCartButton onClick={handleAddToCart}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512">
-                <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
-                <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
-                <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M48 80h64l48 272h256" />
-                <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
-              </svg>
-              Add to Cart
-            </AddToCartButton>
-            <button onClick={handleGoToCheckout}>Go to Checkout</button>
-          </ButtonContainer>
-        </div>
+          <Price>ღირებულება: ${product.price}</Price>
+              <AddToCartButton onClick={handleAddToCart}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512">
+                  <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
+                  <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
+                  <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M48 80h64l48 272h256" />
+                  <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
+                </svg>
+                კალათაში დამატება
+              </AddToCartButton>
+              <AddToCartButton onClick={handleGoToCheckout}>
+                ყიდვა
+              </AddToCartButton>
+            </ButtonContainer>
+        </Wrapper>
       ) : (
-        <Container>Product not found</Container>
+        <Container>პროდუქტი არ მოიძებნა</Container>
       )}
     </Container>
   );
