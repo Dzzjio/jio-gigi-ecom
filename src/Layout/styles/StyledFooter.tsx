@@ -61,7 +61,7 @@ export const SocialMediaContainer = styled.div`
 
 export const SocialMediaLink = styled.a`
   margin: 0 0.5rem;
-  color: #61dafb;
+  fill: #6cb2eb;
   font-size: 1.5rem;
 
   &:hover {

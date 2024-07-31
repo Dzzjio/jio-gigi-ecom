@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import authStore from '../stores/Auth.store'
-import { Role } from '../types/user.interface';
+import { isAdmin } from '../utils';
 
 const AdminRoute = () => {
   const {user} = authStore();
-  return user?.role === Role.ADMIN ? <Outlet /> : <Navigate to="/" />
+  return isAdmin(user?.role) ? <Outlet /> : <Navigate to="/" />
 }
 
 export default AdminRoute

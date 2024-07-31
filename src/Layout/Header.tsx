@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import AuthModal from '../components/UI/AuthModal/AuthModal';
 import CartModal from '../components/UI/cartModal/CartModal';
 import ProfileModal from '../components/UI/ProfileModal';
-import { ButtonContainer, CloseButton, HeaderContainer, HeaderContent, Logo, ModalContent, ModalOverlay, SearchContainer, SearchInput } from './styles/StyledHeader';
+import { ButtonContainer, CloseButton, HeaderContainer, HeaderContent, Logo, ModalContent, ModalOverlay, SearchContainer } from './styles/StyledHeader';
 import { useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 import authStore from '../stores/Auth.store';
 import useModalStore from '../stores/Modal.store'; // Import the new modal store
 import logo from '../assets/Images/logofinal.webp'
+import Search from '../components/Search/search';
 
 const Header = () => {
   const { isModalOpen, modalContent, openModal, closeModal } = useModalStore(state => ({
@@ -17,12 +18,9 @@ const Header = () => {
     closeModal: state.closeModal
   }));
 
-  const [searchValue, setSearchValue] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  const handleSearchChange = (event: any) => {
-    setSearchValue(event.target.value);
-  };
+
 
   const openSearchField = () => {
     setIsSearchOpen(!isSearchOpen);
@@ -42,12 +40,7 @@ const Header = () => {
       <HeaderContent>
         <Link to='/'><Logo src={logo} alt="logo" /></Link>
         <SearchContainer >
-          <SearchInput
-            type="text"
-            placeholder="ძიება..."
-            value={searchValue}
-            onChange={handleSearchChange}
-          />
+          <Search />
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>

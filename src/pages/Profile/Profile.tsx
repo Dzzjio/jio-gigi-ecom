@@ -1,16 +1,28 @@
 import { useEffect } from "react";
-import userServices from "../../services/UserServices";
+import SideBar from "./SideBar";
+import { Outlet, useNavigate } from "react-router";
+import UserProfile from "./UserProfile";
 import authStore from "../../stores/Auth.store";
-import { ProfileContainer, Heading, InfoItem } from './styled';
-import { Button } from "../../components/UI/AuthModal/styled";
+import SectionWrapper from "../../components/SectionWrapper";
+import userServices from "../../services/UserServices";
+import { Heading, InfoItem, ProfileContainer } from "./styled";
+import Button from "../../components/UI/Button";
 
 const Profile = () => {
   const { fullUser, setFullUser, clearTokens } = authStore();
 
+  const navigate = useNavigate();
   useEffect(() => {
-    userServices.getCurrent().then(({ data }) => {
-      setFullUser(data);
-    });
+    userServices
+      .getCurrent()
+      .then(({ data }) => {
+        setFullUser(data);
+      })
+      .catch(() => {
+        if (!fullUser) {
+          navigate("/auth");
+        }
+      });
   }, []);
 
   const handleLogout = () => {
@@ -19,7 +31,13 @@ const Profile = () => {
   };
 
   return (
-    <ProfileContainer>
+    <div>
+      <SideBar role={fullUser?.role} /> 
+      <SectionWrapper>
+        <Outlet />
+      </SectionWrapper>
+      <UserProfile />
+      <ProfileContainer>
       <Heading>პარამეტრები</Heading>
       <InfoItem>
         <span>მეილი</span>
@@ -38,7 +56,8 @@ const Profile = () => {
         <span>გამოსვლა</span>
       </Button>
     </ProfileContainer>
+    </div>
   );
-}
+};
 
 export default Profile;

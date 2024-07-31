@@ -19,7 +19,7 @@ const Shop: React.FC = () => {
     const fetchProducts = async () => {
       setLoadingProducts(true);
       try {
-        const response = await productServices.allProducts();
+        const response = await productServices.allProducts({page: 1, pageSize: 25});
         const productsData = response.data.products; // Extract the products array
         setProducts(productsData); // Update the store with the array of products
       } catch (error) {

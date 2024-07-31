@@ -3,8 +3,8 @@ import { Button, Form, Input, PasswordContainer, ToggleIcon } from './styled';
 import authServices from '../../../services/AuthServices';
 import { useInput } from '../../../hooks/useInput';
 import authStore from '../../../stores/Auth.store';
-import cartProductStore from '../../../stores/Cart.store'; // Import cart store
-import useModalStore from '../../../stores/Modal.store'; // Import the modal store
+import cartProductStore from '../../../stores/Cart.store';
+import useModalStore from '../../../stores/Modal.store';
 import { emailValidator, isValid } from '../../../utils/validation';
 import { toast } from 'react-toastify';
 

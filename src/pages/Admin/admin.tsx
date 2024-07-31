@@ -1,7 +1,12 @@
+import RenderProducts from "./renderProducts"
+
 const AdminPage = () => {
+
+    
     return (
         <div>
-            admin
+            <h2>Admin Panel</h2>
+            <RenderProducts />
         </div>
     )
 }
