@@ -1,5 +1,3 @@
-// cart.store.ts
-
 import { create } from "zustand";
 import { CartProductI } from "../types/cart.interface";
 import authStore from "./Auth.store"; // Ensure this import path is correct

@@ -1,22 +1,28 @@
 import React from "react";
 import cartProductStore from "../../../stores/Cart.store";
 import { CartProductI } from "../../../types/cart.interface";
-import { Button, Heading, ProductItem, } from "./styled";
+import { Heading, ProductItem } from "./styled";
+import Button from "../Button";
 
 const CartModal: React.FC = () => {
-  const { CartProducts, removeSingleCartProduct, removeAllCartProduct, clearCart } = cartProductStore(state => ({
+  const { CartProducts, removeSingleCartProduct, clearCart, addCartProduct } = cartProductStore((state) => ({
     CartProducts: state.CartProducts,
     removeSingleCartProduct: state.removeSingleCartProduct,
     removeAllCartProduct: state.removeAllCartProduct,
-    clearCart: state.clearCart
+    clearCart: state.clearCart,
+    addCartProduct: state.addCartProduct,
   }));
 
   const handleRemoveSingle = (productId: string) => {
     removeSingleCartProduct(productId);
   };
 
-  const handleRemoveAll = (productId: string) => {
-    removeAllCartProduct(productId);
+  // const handleRemoveAll = (productId: string) => {
+  //   removeAllCartProduct(productId);
+  // };
+
+  const handleAddOneMore = (product: CartProductI) => {
+    addCartProduct(product);
   };
 
   const handleClearCart = () => {
@@ -32,11 +38,12 @@ const CartModal: React.FC = () => {
         <div>
           {CartProducts.map((product: CartProductI) => (
             <ProductItem key={product.id}>
+              <img src={product.cartProduct.image} alt={product.id} />
               <h3>{product.cartProduct.title}</h3>
               <h1>Price: ${product.cartProduct.price}</h1>
               <h1>Quantity: {product.count}</h1>
-              <Button onClick={() => handleRemoveSingle(product.id)}>Remove 1</Button>
-              <Button onClick={() => handleRemoveAll(product.id)}>Remove All</Button>
+              <Button onClick={() => handleRemoveSingle(product.id)}>-</Button>
+              <Button onClick={() => handleAddOneMore(product)}>+</Button>
             </ProductItem>
           ))}
         </div>
