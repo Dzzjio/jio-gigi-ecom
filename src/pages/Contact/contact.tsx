@@ -8,6 +8,7 @@ import {
   InputGroup,
   SocialsButtonContainer,
   Title,
+  TextArea,
   // TextArea,
 } from "./styled";
 import { SocialMediaContainer, SocialMediaLink } from "../../Layout/styles/StyledFooter";
@@ -54,7 +55,7 @@ const ContactPage = () => {
           <Input {...phoneNameInput} type="text" name="phone" placeholder="ტელეფონი" />
         </InputGroup>
 
-        <textarea name="message" placeholder="შეიყვანეთ თქვენი შეტყობინება..."></textarea>
+        <TextArea name="message" placeholder="შეიყვანეთ თქვენი შეტყობინება..."/>
         <Button type="submit">გაგზავნა</Button>
         <SocialsButtonContainer>
           <div>

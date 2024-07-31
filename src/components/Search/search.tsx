@@ -52,7 +52,7 @@ const Search = () => {
     return (
         <StyledSearchContainer ref={containerRef}>
             <Input
-                style={{width: '100%', padding: '20px', borderRadius: '5px', border: 'none'}}
+                style={{width: '100%', padding: '15px', borderRadius: '5px', border: 'none'}}
                 label=""
                 {...SearchInput}
                 placeholder="ძიება"
